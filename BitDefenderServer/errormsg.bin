@@ -1,0 +1,9 @@
+HTTP/1.0 404 Not Found
+Connection: close
+Content-Type: text/html
+
+<html>
+  <body>
+      Not Found
+  </body>
+</html>
