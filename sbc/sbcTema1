@@ -1,0 +1,106 @@
+eats_meat(dog).
+eats_meat(cat).
+eats_meat(manedWolf).
+eats_meat(fossa).
+eats_meat(tiger).
+eats_meat(cheetah).
+eats_meat(beardedVolture).
+eats_meat(axolotl).
+eats_meat(narwhal).
+eats_meat(redPanda).
+
+eats_veg(dog).
+eats_veg(duck).
+eats_veg(pinkFairyArmadillo).
+eats_veg(okapi).
+eats_veg(slowLoris).
+eats_veg(angoraRabbit).
+eats_veg(redPanda).
+eats_veg(leafDeer).
+eats_veg(birdOfParadise).
+eats_veg(blueDragon).
+eats_veg(spiderCrab).
+eats_veg(pacuFish).
+
+
+originates(dog, westernEurope).
+originates(cat, egypt).
+originates(duck, southAsia).
+originates(pinkFairyArmadillo, argentina).
+originates(okapi, africa).
+originates(blueDragon, indianPacificOceans).
+originates(manedWolf, brazil).
+originates(fossa, madagascar).
+originates(spiderCrab, japan).
+originates(pacuFish, southAmerica).
+originates(slowLoris, southAsia).
+originates(angoraRabbit, turkey).
+originates(axolotl, mexico).
+originates(beardedVolture, tibet).
+originates(redPanda, himalayas).
+originates(leafDeer, putao).
+originates(tiger, russia).
+originates(narwhal,greenland).
+originates(cheetah,africa).
+originates(birdOfParadise,newGuinea).
+
+diurnal(dog).
+diurnal(duck).
+diurnal(okapi).
+diurnal(blueDragon).
+diurnal(fossa).
+diurnal(manedWolf).
+diurnal(spiderCrab).
+diurnal(pacuFish).
+diurnal(angoraRabbit).
+diurnal(axolotl).
+diurnal(beardedVolture).
+diurnal(redPanda).
+diurnal(leafDeer).
+diurnal(tiger).
+diurnal(narwhal).
+diurnal(cheetah).
+diurnal(birdOfParadise).
+
+nocturnal(cat).
+nocturnal(pinkFairyArmadillo).
+nocturnal(slowLoris).
+nocturnal(fossa).
+
+is_true(X, Y):-remember(X, Y), !.
+is_true(X, Y):-format("~w?\n", [X]), read(Y),
+    assertz(remember(X, Y)).
+
+qanimal(dog):-is_true('says woof', yes).
+qanimal(cat) :-is_true('says meow', yes).
+qanimal(duck):-is_true('has feathers', yes),is_true('says quack', yes).
+qanimal(birdOfParadise):-is_true('has feathers', yes), is_true('splendid', yes), is_true('knows dancing', yes).
+qanimal(pinkFairyArmadillo):-is_true('has fur', yes),is_true('threatened', yes),is_true("eats insects", yes),is_true('armadillo', yes).
+qanimal(okapi):-is_true('has stripes', yes),is_true('solitary', yes),is_true('related to giraffe', yes).
+qanimal(blueDragon):-is_true('blue', yes),is_true('dragon like', yes).
+qanimal(manedWolf):-is_true('has fur', yes),is_true('close to dogs', yes), is_true('looks like wolf', yes), is_true('hunts alone', yes).
+qanimal(fossa):-is_true('close to Mongoose', yes), is_true('brown', yes), is_true('likes lemurs', yes).
+qanimal(spiderCrab):-is_true('aquatic', yes), is_true('difficult to catch', yes), is_true('delicatese', yes).
+qanimal(pacuFish):-is_true('human-like teeth', yes), is_true('likes seeds and nuts', yes), is_true('fish', yes).
+qanimal(slowLoris):-is_true('big eyes', yes), is_true('adorable', yes), is_true('solitary', yes), is_true('silent', yes).
+qanimal(angoraRabbit):-is_true('cute', yes), is_true('fluffy', yes), is_true('long ears', yes).
+qanimal(axolotl):-is_true('aquatic', yes), is_true('salamander', yes), is_true('eats small worms', yes).
+qanimal(beardedVolture):-is_true('looks like pheonix', yes), is_true('beautiful', yes).
+qanimal(redPanda):-is_true('red', yes), is_true('sedentary', yes).
+qanimal(leafDeer):-is_true('small', yes), is_true('cute', yes), is_true('deer',yes).
+qanimal(tiger):-is_true('feline', yes), is_true('wonderful', yes), is_true('powerful', yes).
+qanimal(narwhal):-is_true('aquatic', yes), is_true('eats cod', yes), is_true('whale-like', yes), is_true('has a long horn', yes).
+qanimal(cheetah):-is_true('incredibly agile', yes), is_true('fastest cat alive', yes).
+
+
+%is_true(X, yes):-format("~w?\n", [X]), read(yes).
+remember(false, false).
+
+time(X, nocturnal):-nocturnal(X).
+time(X, diurnal):-diurnal(X).
+
+food(carnivore, X):-eats_meat(X), not(eats_veg(X)).
+food(herbivore, X):-not(eats_meat(X)), eats_veg(X).
+food(omnivore, X):-eats_meat(X), eats_veg(X).
+
+animal(X, Y, Z, F):-qanimal(X), originates(X,Y), time(X, Z), food(F, X), !.
