@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo -e \\x88\\x99\\xaa\\xbb\\xcc\\xdd\\xee\\xff 
